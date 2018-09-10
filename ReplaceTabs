@@ -1,0 +1,27 @@
+Sub ReplaceTabs()
+'
+' ReplaceTabs Macro
+' Replaces a string of 2 to 15 tabs with a single tab
+' Helpful to change tab-tab-tab-tab-tab to a single tab
+' so that a tab stop can be set.
+'
+    Selection.Find.ClearFormatting
+    Selection.Find.Replacement.ClearFormatting
+    With Selection.Find
+        .Text = "^t{2,15}"
+        .Replacement.Text = "^t"
+        .Forward = True
+        .Wrap = wdFindStop   ' so that it will stop at the end of the current selected text
+        .Format = False
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchKashida = False
+        .MatchDiacritics = False
+        .MatchAlefHamza = False
+        .MatchControl = False
+        .MatchAllWordForms = False
+        .MatchSoundsLike = False
+        .MatchWildcards = True
+    End With
+    Selection.Find.Execute Replace:=wdReplaceAll
+End Sub
